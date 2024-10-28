@@ -4,6 +4,7 @@ This repository contains a simplified C++ implementation of the attention mechan
 
 ## Key Features
 - **Attention Mechanism without Multiplication:** Implements core bitnet-attention logic without traditional multiplication.
+- **Prefill Stage:** Implements the initial inference stage, using the linear layer with GEMM operations. This stage does not involve retrieving the previous KV-Cache.
 - **Eager Attention:** Doesn't support flash_attention right now.
 - **8-bit Activation Quantization:** Efficiently quantizes activations using 8-bit precision.
 - **Random Weights & Embeddings:** Test using random initialization of weights, rotary embeddings,RMSNorm weights, and random activations.
