@@ -72,8 +72,12 @@ std::vector<std::vector<float>> linear_forward_no_mul(const std::vector<std::vec
                 for (int l = 0; l < 4 && (k + l) < input_cols; ++l) {
                     int8_t weight_value = extract_weight_col(packed_value, l);
 
-                    // Add or subtract based on weight_value, using integer GEMM
-                    output[i][j] += input[i][k + l] * weight_value;
+                    // Add or subtract based on weight_value, avoiding multiplication
+                    if (weight_value == 1) {
+                        output[i][j] += input[i][k + l];
+                    } else if (weight_value == -1) {
+                        output[i][j] -= input[i][k + l];
+                    }
                 }
             }
 
